@@ -5,10 +5,10 @@
 	displayAddress(address1 + addr2 + ", " + city + ", " + state);
     }
 
-    //Rest parameters
-    function buildAddressRest(city: string, state: string, addresses: string[]) {
+    ////Rest parameters
+    function buildAddressRest(city: string, state: string,  ...addresses: string[]) {
 	var fullAddress = "";
-	addresses.forEach((addr) => fullAddress += (addr.length > 0) ? addr + ", " : ""); // Aggregate
+	addresses.forEach(addr => fullAddress += (addr.length > 0) ? addr + ", " : ""); // Aggregate
 	fullAddress += city + ", " + state;
 	displayAddress(fullAddress);
     }
@@ -29,6 +29,6 @@
     //addressButton.addEventListener('click', () => buildAddressOptional(address.value, city.value, state.value, address2.value));
 
     //Call function with Rest parameters
-    addressButton.addEventListener("click", () => buildAddressRest(city.value, state.value, [address.value, address2.value]));
+    addressButton.addEventListener("click", () => buildAddressRest(city.value, state.value, address.value, address2.value));
 
 })());
