@@ -1,28 +1,35 @@
-﻿class Greeter {
-    element: HTMLElement;
-    span: HTMLElement;
-    timerToken: number;
+﻿(function () {
 
-    constructor(element: HTMLElement) {
-        this.element = element;
-        this.element.innerHTML += "The time is: ";
-        this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = new Date().toUTCString();
+    //Optional parameter
+    function buildAddressOptional(address1: string, city: string, address2?: string) {
+        var addr2: string = (address2.length > 0) ? ', ' + address2 : '';
+        displayAddress(address1 + addr2 + ', ' + city);
     }
 
-    start() {
-        this.timerToken = setInterval(() => this.span.innerHTML = new Date().toUTCString(), 500);
+    //Rest parameters
+    function buildAddressRest(city: string, ...Address: string[]) {
+        var address = '';
+        Address.forEach((addr) => address += (addr.length > 0) ? addr + ', ' : '');
+        address += city;
+        displayAddress(address);
     }
 
-    stop() {
-        clearTimeout(this.timerToken);
+    function displayAddress(msg: string) {
+        result.innerHTML = msg;
     }
 
-}
+    var $ = (id) => document.getElementById(id);
 
-window.onload = () => {
-    var el = document.getElementById('content');
-    var greeter = new Greeter(el);
-    greeter.start();
-};
+    var addressButton: HTMLButtonElement = <HTMLButtonElement>$('addressButton'),
+        address: HTMLInputElement = <HTMLInputElement>$('address'),
+        address2: HTMLInputElement = <HTMLInputElement>$('address2'),
+        city: HTMLInputElement = <HTMLInputElement>$('city'),
+        result = $('result');
+
+    //Call function with optional parameter
+    //addressButton.addEventListener('click',(e) => buildAddressOptional(address.value, city.value, address2.value));
+
+    //Call function with Rest parameters
+    addressButton.addEventListener('click', (e) => buildAddressRest(city.value, address.value, address2.value));
+
+} ());
