@@ -1,4 +1,4 @@
-# Microsoft: DEV201x Programming with TypeScript
+# Microsoft: DEV201x Introduction to TypeScript
 
 ## Warning
 
